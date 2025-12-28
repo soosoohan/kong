@@ -318,7 +318,6 @@
 
 </div>
 <script>
-let words = []; // 전역 변수 선언
 
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -327,7 +326,7 @@ window.onload = () => {
     // 임시로 기본 단어들 설정
     words = ['CAT', 'AREA','ALSO','ABOUT','AGAIN','ACTION','ACTRESS'];
     gameSection.classList.remove('hidden');
-    startGame();
+    startGame(); 
     return;
   }
 
@@ -358,7 +357,7 @@ window.onload = () => {
 
 let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
 let player1 = "플레이어1", player2 = "플레이어2", currentPlayerName = "", wrongGuesses = [];
-let words = []; // 이 줄 추가!
+let words = []; 
 
   const gameEl = document.getElementById('game');
   const player1ScoreEl = document.getElementById('player1Score');
