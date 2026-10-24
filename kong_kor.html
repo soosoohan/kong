@@ -222,7 +222,7 @@ const totalCells = gridWidth * gridHeight;
 
 let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
 let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
-let player1 = "GREEN", player2 = "PINK", currentPlayerName = "";
+let player1 = "초록", player2 = "분홍", currentPlayerName = "";
 let lastIndex = null;
 
 const gameEl = document.getElementById('game');
@@ -481,7 +481,7 @@ function updateScore() {
 function updateTurnDisplay() {
   if (!gameStarted || resultShown) return;
   currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-  currentTurnEl.textContent = `${currentPlayerName}'의 차례입니다.`;
+  currentTurnEl.textContent = `${currentPlayerName}의 차례입니다.`;
   currentTurnEl.className = currentPlayer === 'player1' ? 'turn-player1' : 'turn-player2';
 }
 
