@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -34,7 +33,7 @@ gtag('config', 'G-4YZHC1G9FN');
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: 'Noto Sans KR', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   background: #145454;
   color: #fff;
   display: flex;
@@ -164,7 +163,6 @@ footer p { color: #c3dbdb; font-size: 0.8rem; }
   button { font-size: 1em; padding: 12px 25px; flex: 1; max-width: 150px; }
 }
 
-
 @media (max-width: 480px) {
   .back-button { top: max(30px, env(safe-area-inset-top) + 10px); left: 10px; width: 40px; height: 40px; font-size: 1.5em; }
 }
@@ -189,18 +187,18 @@ footer p { color: #c3dbdb; font-size: 0.8rem; }
   <div id="currentTurn"></div>
 
   <div class="container">
-    <div id="player1Score"><h2>초록:</h2></div>
+    <div id="player1Score"><h2>GREEN:</h2></div>
     <div id="game"></div>
-    <div id="player2Score"><h2>분홍:</h2></div>
+    <div id="player2Score"><h2>PINK:</h2></div>
   </div>
 
   <div class="score-container">
-    <div id="player1Score-mobile"><h2>초록:</h2></div>
-    <div id="player2Score-mobile"><h2>분홍:</h2></div>
+    <div id="player1Score-mobile"><h2>GREEN:</h2></div>
+    <div id="player2Score-mobile"><h2>PINK:</h2></div>
   </div>
 
   <div class="btn-container">
-    <button id="retryBtn">↻ 다시 하기</button>
+    <button id="retryBtn">↻ Try Again</button>
   </div>
 </div>
 
@@ -217,13 +215,14 @@ window.onerror = function (msg, src, line) {
   document.body.appendChild(d);
 };
 
+// ===== 쯔니 로직 (변수명 그대로) =====
 const gridWidth = 7;
 const gridHeight = 7;
 const totalCells = gridWidth * gridHeight;
 
 let board, revealed, wordMap, foundWords, currentPlayer, foundBy, words, usedIndexes;
 let clovers = new Set(), daisies = new Set(), resultShown = false, gameStarted = false;
-let player1 = "초록", player2 = "분홍", currentPlayerName = "";
+let player1 = "GREEN", player2 = "PINK", currentPlayerName = "";
 let lastIndex = null;
 
 const gameEl = document.getElementById('game');
@@ -253,8 +252,7 @@ window.onload = () => {
   const poolFile = urlParams.get('pool');
 
   if (!poolFile) {
-       words = ['계륵', '각골난망', '각주구검', '거두절미', '개과천선', '감지덕지','등용문'];
-     
+           words = ['계륵', '각골난망', '각주구검', '거두절미', '개과천선', '감지덕지','등용문'];
     startGame();
     return;
   }
@@ -262,7 +260,7 @@ window.onload = () => {
   fetch('wordpools/' + poolFile + '.json')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('game-title').textContent = data.title || '메이트 콩';
+      document.getElementById('game-title').textContent = data.title || 'Worpuzz Mate';
       const rawText = data.description || '';
       document.getElementById('game-desc').innerHTML = rawText.replace(/\n/g, '<br>');
 
@@ -416,7 +414,7 @@ function isSafeForSpecial(idx) {
 }
 
 function fillEmptyCells() {
-  const filler = '같갛개거건걸것게고괴교국궁그근금기긴까깜깨꺾껴꼼꽁꾸끔난내넘넣네놀놈누뉴는니님다닥대댄더던덩데도동두드득든듣들등디딜딱때땡똑뚫뛰라락란람랐랑래랜러레려력렸로롭르른를리린림마만맛맞맨머먼멀메멘며몰무묻뭘미민바받방버벅번봐봤부붙브블비빈빌빔빠빡빨빼뻥사새생서섭섰세숙쉬슴실싶쌍쓰씌씻아악알았애야어엄업없었엉에여열옛오온올와왔왜우울원위유윤으을음의익인잃있잊작잖잘저전제져좋주줬짜짝찍차착참창채척천청체쳤초출췄취치친카켜코콜크테토트튼폭핀하학한할해햄했행현호혼화환히'.split('');
+    const filler = '같갛개거건걸것게고괴교국궁그근금기긴까깜깨꺾껴꼼꽁꾸끔난내넘넣네놀놈누뉴는니님다닥대댄더던덩데도동두드득든듣들등디딜딱때땡똑뚫뛰라락란람랐랑래랜러레려력렸로롭르른를리린림마만맛맞맨머먼멀메멘며몰무묻뭘미민바받방버벅번봐봤부붙브블비빈빌빔빠빡빨빼뻥사새생서섭섰세숙쉬슴실싶쌍쓰씌씻아악알았애야어엄업없었엉에여열옛오온올와왔왜우울원위유윤으을음의익인잃있잊작잖잘저전제져좋주줬짜짝찍차착참창채척천청체쳤초출췄취치친카켜코콜크테토트튼폭핀하학한할해햄했행현호혼화환히'.split('');
   shuffle(filler);
   let i = 0;
   for (let j = 0; j < totalCells; j++) {
@@ -448,7 +446,7 @@ function reveal(index) {
   } else if (daisies.has(index)) {
     const img = document.createElement('img');
     img.src = 'daisy_64x64.png';
-    img.alt = '데이지';
+    img.alt = 'Daisy';
     img.style.width = '24px';
     img.style.height = '24px';
     cell.appendChild(img);
@@ -483,7 +481,7 @@ function updateScore() {
 function updateTurnDisplay() {
   if (!gameStarted || resultShown) return;
   currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-  currentTurnEl.textContent = `${currentPlayerName} 차례예요.`;
+  currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
   currentTurnEl.className = currentPlayer === 'player1' ? 'turn-player1' : 'turn-player2';
 }
 
@@ -530,10 +528,10 @@ function checkGameEnd() {
     const p1Count = foundBy.player1.length;
     const p2Count = foundBy.player2.length;
     let winner;
-    if (p1Count > p2Count) winner = `${player1} 승리!`;
-    else if (p2Count > p1Count) winner = `${player2} 승리!`;
-    else winner = "무승부!";
-    currentTurnEl.textContent = `게임 끝! ${winner} (${player1}: ${p1Count} / ${player2}: ${p2Count})`;
+    if (p1Count > p2Count) winner = `${player1} Wins!`;
+    else if (p2Count > p1Count) winner = `${player2} Wins!`;
+    else winner = "It's a Draw!";
+    currentTurnEl.textContent = `Game Over! ${winner} (${player1}: ${p1Count} / ${player2}: ${p2Count})`;
     currentTurnEl.className = '';
   }
 }
