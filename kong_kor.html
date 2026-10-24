@@ -481,7 +481,7 @@ function updateScore() {
 function updateTurnDisplay() {
   if (!gameStarted || resultShown) return;
   currentPlayerName = currentPlayer === 'player1' ? player1 : player2;
-  currentTurnEl.textContent = `It is ${currentPlayerName}'s turn.`;
+  currentTurnEl.textContent = `${currentPlayerName}'의 차례입니다.`;
   currentTurnEl.className = currentPlayer === 'player1' ? 'turn-player1' : 'turn-player2';
 }
 
